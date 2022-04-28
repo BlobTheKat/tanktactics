@@ -101,6 +101,7 @@ wss.on('connection', async function(sock, {url}){
 	if(ALLOW_RENAMING && me)me.name = name
 	sock.send(`board ${FREQ} ${WIDTH} ${HEIGHT} ${index}` + GAME.map(tostringclient).join(''))
 	sock.on('message', function(msg){
+		me = GAME[index]
 		msg = msg.toString()
 		let [code] = msg.split('\n'), meta;
 		[code, ...meta] = code.split(' ')
