@@ -41,7 +41,7 @@ let savegame = () => fs.writeFile('game', `${FREQ} ${WIDTH} ${HEIGHT} ${POINTS}`
 
 setInterval(savegame, 10000)
 function newplayer(token, name, sock){
-	let tank = {x: 0, y: 0, token, health: 3, points: POINTS, name, range: DEFAULT_RANGE, vote: -1}
+	let tank = {x: 0, y: 0, token, health: 3, points: Math.min(1, POINTS), name, range: DEFAULT_RANGE, vote: -1}
 	let pos = null
 	while(!pos || POSITIONS.has(pos))pos = (Math.floor(Math.random() * (WIDTH - 2)) + 1) + ' ' + (Math.floor(Math.random() * (HEIGHT - 2)) + 1);
 	POSITIONS.add(pos)
