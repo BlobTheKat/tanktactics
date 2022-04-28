@@ -1,4 +1,6 @@
 
+export const PORT = 444
+
 ///// Options regarding how the game is initialized /////
 export const FORCE_DEFAULT = false //If false, the following properties will only have an effect when you start a new game. If true, they will be replace right away
 //Beware when changing some properties, that they might break the existing board (e.g players getting stuck outside the map)

@@ -3,7 +3,7 @@ import {WebSocketServer} from 'ws'
 import {promises as fs} from 'fs'
 import {createServer} from 'https'
 let SECURE = false
-import {MAX_PLAYERS, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_RANGE, ALLOW_JURY, DEFAULT_FREQUENCY, FORCE_DEFAULT, ALLOW_MIDGAME_JOINS, RANGE_CHECKS, ALLOW_RENAMING} from './config.js'
+import {MAX_PLAYERS, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_RANGE, ALLOW_JURY, DEFAULT_FREQUENCY, FORCE_DEFAULT, ALLOW_MIDGAME_JOINS, RANGE_CHECKS, ALLOW_RENAMING, PORT} from './config.js'
 
 function tank(a){
 	let [x, y, health, vote, token, ...name] = a.split(' ')
@@ -88,11 +88,10 @@ function update(){
 
 let wss
 if(SECURE){
-	wss = new WebSocketServer({ server: createServer({key: await fs.readFile('a.key'),cert: await fs.readFile('a.pem') }).listen(444) })
-}else wss = new WebSocketServer({ port: 80 })
+	wss = new WebSocketServer({ server: createServer({key: await fs.readFile('../../.key'),cert: await fs.readFile('../../.pem') }).listen(PORT) })
+}else wss = new WebSocketServer({ port: PORT })
 
 let next = FREQ - ((Date.now()+500)%FREQ)
-if(next < FREQ / 2)next += FREQ
 setTimeout(update, next)
 
 wss.on('connection', async function(sock, {url}){
