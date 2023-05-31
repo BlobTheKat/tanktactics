@@ -562,7 +562,7 @@
 		}
 		function parseTank(t){
 			let [x, y, points, ...name] = t.split(' ')
-			name = name.join(' ')
+			name = decodeURIComponent(name.join(' '))
 			let tank = new Tank(COLORS[PLAYERS.length%15], +x, +y, name)
 			tank.action = +points.slice(2)
 			tank.data.range = +points[1]
