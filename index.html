@@ -556,10 +556,6 @@
 		function rectHas(rect, e){
 			return e.clientX > rect.left && e.clientY > rect.top && e.clientX < rect.right && e.clientY < rect.bottom
 		}
-
-		function randomCode(){
-			return (Date.now().toString(36)+Math.floor(Math.random()*36**6).toString(36).padStart('0',6)).slice(2)
-		}
 		function parseTank(t){
 			let [x, y, points, ...name] = t.split(' ')
 			name = decodeURIComponent(name.join(' '))
@@ -577,7 +573,7 @@
 		let ws = null
 		function newgame(){
 			unpause()
-			ws = new WebSocket('wss://server.canv.tk:444/' + localStorage.token + '/' + (localStorage.name || ''))
+			ws = new WebSocket('wss://server.canv.tk:42069/' + localStorage.token + '/' + (localStorage.name || ''))
 			ws.onmessage = function(e){
 				let [code, ...data] = e.data.split('\n'), meta;
 				[code, ...meta] = code.split(' ')
